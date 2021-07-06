@@ -127,6 +127,10 @@
             //then get URI
             params[M3U8_EXTINF_URI] = line;
             
+            if (self.originalURL) {
+                [params setObject:[self.baseURL URLByAppendingPathComponent:line] forKey:M3U8_URL];
+            }
+            
             M3U8SegmentInfo *segment = [[M3U8SegmentInfo alloc] initWithDictionary:params xKey:key byteRange:byteRange];
             if (segment) {
                 [self.segmentList addSegementInfo:segment];
