@@ -127,7 +127,8 @@
             //then get URI
             params[M3U8_EXTINF_URI] = line;
             
-            if (self.originalURL) {
+            // if path is relative get final URL 
+            if (![line containsString:@"http://"] || ![line containsString:@"https://"]) {
                 [params setObject:[self.baseURL URLByAppendingPathComponent:line] forKey:M3U8_URL];
             }
             
