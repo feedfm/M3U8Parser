@@ -100,8 +100,13 @@
             if (self.baseURL) {
                 attr[M3U8_BASE_URL] = self.baseURL;
             }
+            for (M3U8ExtXStreamInf *xStreamInf  in _xStreamList) {
+                
+                attr[M3U8_EXT_X_STREAM_INF_AUDIO] = FEED_AUDIO_GROUP_ID;
+            }
             
             M3U8ExtXStreamInf *xStreamInf = [[M3U8ExtXStreamInf alloc] initWithDictionary:attr];
+            
             [self.xStreamList addExtXStreamInf:xStreamInf];
         }
         
@@ -125,6 +130,8 @@
             if (self.originalURL.absoluteString.length > 0) {
                 attr[M3U8_URL] = self.originalURL;
             }
+            attr[M3U8_EXT_X_MEDIA_AUTOSELECT] = @"NO";
+            attr[M3U8_EXT_X_MEDIA_DEFAULT] = @"NO";
             M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
             [self.xMediaList addExtXMedia:media];
         }
@@ -143,6 +150,20 @@
     }
     return [array copy];
 }
+
+-(void) addAlternateAudio:(NSString *)uri {
+    
+    
+    NSString *line = @"#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID=\"\",LANGUAGE=\"eng\",NAME=\"Music and Audio\",AUTOSELECT=YES,DEFAULT=YES,URI=\"";
+    NSRange range = [line rangeOfString:M3U8_EXT_X_MEDIA];
+    NSString *attribute_list = [line substringFromIndex:range.location + range.length];
+    NSMutableDictionary *attr = attribute_list.m3u_attributesFromAssignment;
+    attr[M3U8_EXT_X_MEDIA_GROUP_ID] = FEED_AUDIO_GROUP_ID;
+    attr[M3U8_EXT_X_MEDIA_URI] = uri;
+    M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
+    [self.xMediaList addExtXMedia:media];
+}
+
 
 - (M3U8ExtXStreamInfList *)alternativeXStreamInfList {
     

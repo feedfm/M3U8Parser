@@ -72,6 +72,8 @@
 
 - (NSArray *)segmentNamesForPlaylist:(M3U8MediaPlaylist *)playlist;
 
+
+
 // segment name will be formatted as ["%@%d.%@", prefix, index, sufix] eg. main_media_1.ts
 - (void)savePlaylistsToPath:(NSString *)path error:(NSError **)error;
 

@@ -51,10 +51,29 @@
                                    baseURL:baseURL
                                    error:&error];
     NSLog(@"%@", playList);
+    [playList.masterPlaylist addAlternateAudio:@"https://hls.feed.com"];
     NSArray *codecs = [playList.masterPlaylist.xStreamList xStreamInfAtIndex:0].codecs;
     XCTAssert([codecs[0] isEqualToString:@"avc1.42c01e"]);
     XCTAssert([codecs[1] isEqualToString:@"mp4a.40.2"]);
     XCTAssertNil(error);
+}
+
+
+- (void)testMasterWrite {
+    NSURL *baseURL = [NSURL URLWithString:@"https://hls.ted.com"];
+    NSError *error = nil;
+    M3U8PlaylistModel *playList = [[M3U8PlaylistModel alloc]
+                                   initWithString:_example.m3u8Master
+                                   baseURL:baseURL
+                                   error:&error];
+    //NSLog(@"%@", playList);
+    [playList.masterPlaylist addAlternateAudio:@"https://hls.feed.com"];
+    //NSString *tmpDirectory = NSTemporaryDirectory();
+    //NSString *tmpFile = [tmpDirectory stringByAppendingPathComponent:@"playlists"];
+    
+    //[playList savePlaylistsToPath:tmpFile error:nil];
+    NSLog(@"%@", playList.masterPlaylist.m3u8PlainString);
+    
 }
 
 - (void)testPlaylistM3U {

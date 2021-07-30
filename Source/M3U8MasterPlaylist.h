@@ -29,6 +29,8 @@
 - (NSArray *)allStreamURLs;
 
 - (M3U8ExtXStreamInfList *)alternativeXStreamInfList;
+//#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="600k",LANGUAGE="eng",NAME="Audio",AUTOSELECT=YES,DEFAULT=YES,URI="/talks/769/audio/600k.m3u8?sponsor=Ripple",BANDWIDTH=614400
+- (void) addAlternateAudio:(NSString*) uri;
 
 - (instancetype)initWithContent:(NSString *)string baseURL:(NSURL *)baseURL;
 - (instancetype)initWithContentOfURL:(NSURL *)URL error:(NSError **)error;
