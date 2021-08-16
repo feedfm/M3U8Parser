@@ -33,7 +33,7 @@ MediaResoulution MediaResolutionMake(float width, float height) {
 
 
 @interface M3U8ExtXStreamInf()
-@property (nonatomic, strong) NSDictionary *dictionary;
+@property (nonatomic, strong) NSMutableDictionary *dictionary;
 @property (nonatomic) MediaResoulution resolution;
 @end
 
@@ -88,6 +88,10 @@ MediaResoulution MediaResolutionMake(float width, float height) {
 
 - (NSString *)audio {
     return self.dictionary[M3U8_EXT_X_STREAM_INF_AUDIO];
+}
+
+- (void) updateAudioTAG:(NSString*)value {
+    self.dictionary[M3U8_EXT_X_STREAM_INF_AUDIO] = value;
 }
 
 - (NSString *)video {

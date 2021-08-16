@@ -100,10 +100,7 @@
             if (self.baseURL) {
                 attr[M3U8_BASE_URL] = self.baseURL;
             }
-            for (M3U8ExtXStreamInf *xStreamInf  in _xStreamList) {
-                
-                attr[M3U8_EXT_X_STREAM_INF_AUDIO] = FEED_AUDIO_GROUP_ID;
-            }
+            
             
             M3U8ExtXStreamInf *xStreamInf = [[M3U8ExtXStreamInf alloc] initWithDictionary:attr];
             
@@ -161,6 +158,11 @@
     attr[M3U8_EXT_X_MEDIA_GROUP_ID] = FEED_AUDIO_GROUP_ID;
     attr[M3U8_EXT_X_MEDIA_URI] = uri;
     M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
+    for (NSInteger i = 0; i< _xStreamList.count; i++ ) {
+        M3U8ExtXStreamInf *stream = [_xStreamList xStreamInfAtIndex:i];
+        [stream updateAudioTAG:FEED_AUDIO_GROUP_ID];
+    }
+    
     [self.xMediaList addExtXMedia:media];
 }
 

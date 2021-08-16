@@ -87,6 +87,22 @@
     XCTAssertNil(error);
 }
 
+- (void)testAlternateAudioWrite {
+    
+    NSURL *baseURL = [NSURL URLWithString:@"https://content.uplynk.com/bdc4ab3f59924508a8cdc87895ead8cd.m3u8"];
+
+    NSError *error = nil;
+    M3U8PlaylistModel *playList = [[M3U8PlaylistModel alloc] initWithURL:baseURL error:&error];
+    //NSLog(@"%@", playList);
+    [playList.masterPlaylist addAlternateAudio:@"https://hls.feed.com"];
+    //NSString *tmpDirectory = NSTemporaryDirectory();
+    //NSString *tmpFile = [tmpDirectory stringByAppendingPathComponent:@"playlists"];
+    
+    //[playList savePlaylistsToPath:tmpFile error:nil];
+    NSLog(@"%@", playList.masterPlaylist.m3u8PlainString);
+    
+}
+
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{

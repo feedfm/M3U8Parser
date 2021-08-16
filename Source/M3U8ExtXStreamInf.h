@@ -52,7 +52,7 @@ NSString * NSStringFromMediaResolution(MediaResoulution resolution);
 @property (nonatomic, readonly, assign) NSInteger programId;        // removed by draft 12
 @property (nonatomic, readonly, copy) NSArray *codecs;
 @property (nonatomic, readonly) MediaResoulution resolution;
-@property (nonatomic, readonly, copy) NSString *audio;
+@property (nonatomic, assign) NSString *audio;
 @property (nonatomic, readonly, copy) NSString *video;
 @property (nonatomic, readonly, copy) NSString *subtitles;
 @property (nonatomic, readonly, copy) NSString *closedCaptions;
@@ -61,7 +61,7 @@ NSString * NSStringFromMediaResolution(MediaResoulution resolution);
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 - (NSURL *)m3u8URL; // the absolute url
-
+- (void) updateAudioTAG:(NSString*)value;
 - (NSString *)m3u8PlainString;
 
 @end
