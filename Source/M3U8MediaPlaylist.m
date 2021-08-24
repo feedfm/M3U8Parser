@@ -69,6 +69,15 @@
     return [array copy];
 }
 
+- (NSTimeInterval) totalDuration {
+    NSTimeInterval time = 0;
+    for (int i = 0; i < self.segmentList.count; i ++) {
+        M3U8SegmentInfo *info = [self.segmentList segmentInfoAtIndex:i];
+        time = time + info.duration;
+    }
+    return time;
+}
+
 - (void)parseMediaPlaylist
 {
     self.segmentList = [[M3U8SegmentInfoList alloc] init];

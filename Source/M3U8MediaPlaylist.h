@@ -39,4 +39,6 @@ typedef enum {
 
 - (NSArray *)allSegmentURLs;
 
+- (NSTimeInterval) totalDuration;
+
 @end
