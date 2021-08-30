@@ -232,15 +232,6 @@
 
 - (void)savePlaylistsToPath:(NSString *)path error:(NSError **)error {
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        if (NO == [[NSFileManager defaultManager] removeItemAtPath:path error:error]) {
-            return;
-        }
-    }
-    if (NO == [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:error]) {
-        return;
-    }
-    
     if (self.masterPlaylist) {
         
         // master playlist
