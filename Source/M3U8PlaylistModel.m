@@ -245,11 +245,7 @@
         
         // master playlist
         NSString *masterContext = self.masterPlaylist.m3u8PlainString;
-        for (int i = 0; i < self.masterPlaylist.xStreamList.count; i ++) {
-            M3U8ExtXStreamInf *xsinf = [self.masterPlaylist.xStreamList xStreamInfAtIndex:i];
-            NSString *name = [NSString stringWithFormat:@"%@%d.m3u8", PREFIX_MAIN_MEDIA_PLAYLIST, i];
-            masterContext = [masterContext stringByReplacingOccurrencesOfString:xsinf.URI.absoluteString withString:name];
-        }
+       
         NSString *mPath = [path stringByAppendingPathComponent:self.indexPlaylistName];
         BOOL success = [masterContext writeToFile:mPath atomically:YES encoding:NSUTF8StringEncoding error:error];
         if (NO == success) {
