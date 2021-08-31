@@ -245,8 +245,8 @@
         }
         
         // main media playlist
-        [self saveMediaPlaylist:self.mainMediaPl toPath:path error:error];
-        [self saveMediaPlaylist:self.audioPl toPath:path error:error];
+        //[self saveMediaPlaylist:self.mainMediaPl toPath:path error:error];
+        //[self saveMediaPlaylist:self.audioPl toPath:path error:error];
         
     } else {
         [self saveMediaPlaylist:self.mainMediaPl toPath:path error:error];

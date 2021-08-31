@@ -103,9 +103,8 @@
             
             
             M3U8ExtXStreamInf *xStreamInf = [[M3U8ExtXStreamInf alloc] initWithDictionary:attr];
-            if(xStreamInf.codecs.count > 1){
-                [xStreamInf updateAudioTAG:FEED_AUDIO_GROUP_ID];
-            }
+            
+            [xStreamInf updateAudioTAG:FEED_AUDIO_GROUP_ID];
             [self.xStreamList addExtXStreamInf:xStreamInf];
         }
         
@@ -129,7 +128,6 @@
             if (self.originalURL.absoluteString.length > 0) {
                 attr[M3U8_URL] = self.originalURL;
             }
-            attr[M3U8_EXT_X_MEDIA_GROUP_ID] = FEED_AUDIO_GROUP_ID;
             attr[M3U8_EXT_X_MEDIA_AUTOSELECT] = @"NO";
             attr[M3U8_EXT_X_MEDIA_DEFAULT] = @"NO";
             M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
@@ -161,7 +159,17 @@
     attr[M3U8_EXT_X_MEDIA_GROUP_ID] = FEED_AUDIO_GROUP_ID;
     attr[M3U8_EXT_X_MEDIA_URI] = uri;
     M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
+    
+    for (NSInteger i = 0; i< _xStreamList.count; i++ ) {
+        M3U8ExtXStreamInf *stream = [_xStreamList xStreamInfAtIndex:i];
+        if(stream.codecs.count > 1){
+            [stream updateAudioTAG:FEED_AUDIO_GROUP_ID];
+        }
+    }
+    
     [self.xMediaList addExtXMedia:media];
+    
+    
 }
 
 
@@ -200,12 +208,6 @@
         [str appendString:[NSString stringWithFormat:@"%@%@", M3U8_EXT_X_VERSION, self.version]];
         [str appendString:@"\n"];
     }
-    for (NSInteger index = 0; index < self.xStreamList.count; index ++) {
-        M3U8ExtXStreamInf *xsinf = [self.xStreamList xStreamInfAtIndex:index];
-        [str appendString:xsinf.m3u8PlainString];
-        [str appendString:@"\n"];
-    }
-    
     M3U8ExtXMediaList *audioList = self.xMediaList.audioList;
     for (NSInteger i = 0; i < audioList.count; i ++) {
         NSLog(@"ext x media %ld", (long)i);
@@ -213,6 +215,14 @@
         [str appendString:media.m3u8PlainString];
         [str appendString:@"\n"];
     }
+    
+    for (NSInteger index = 0; index < self.xStreamList.count; index ++) {
+        M3U8ExtXStreamInf *xsinf = [self.xStreamList xStreamInfAtIndex:index];
+        [str appendString:xsinf.m3u8PlainString];
+        [str appendString:@"\n"];
+    }
+    
+    
     
     return str;
 }

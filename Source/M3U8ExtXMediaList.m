@@ -29,7 +29,7 @@
 
 - (void)addExtXMedia:(M3U8ExtXMedia *)extXMedia {
     if (extXMedia) {
-        [self.m3u8InfoList addObject:extXMedia];
+        [self.m3u8InfoList insertObject:extXMedia atIndex:0];
     }
 }
 
