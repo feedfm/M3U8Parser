@@ -103,8 +103,9 @@
             
             
             M3U8ExtXStreamInf *xStreamInf = [[M3U8ExtXStreamInf alloc] initWithDictionary:attr];
-            
-            [xStreamInf updateAudioTAG:FEED_AUDIO_GROUP_ID];
+            if(xStreamInf.codecs.count > 1){
+                [xStreamInf updateAudioTAG:FEED_AUDIO_GROUP_ID];
+            }
             [self.xStreamList addExtXStreamInf:xStreamInf];
         }
         
