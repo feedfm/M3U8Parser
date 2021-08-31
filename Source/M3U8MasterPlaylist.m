@@ -104,6 +104,7 @@
             
             M3U8ExtXStreamInf *xStreamInf = [[M3U8ExtXStreamInf alloc] initWithDictionary:attr];
             
+            [xStreamInf updateAudioTAG:FEED_AUDIO_GROUP_ID];
             [self.xStreamList addExtXStreamInf:xStreamInf];
         }
         
@@ -127,6 +128,7 @@
             if (self.originalURL.absoluteString.length > 0) {
                 attr[M3U8_URL] = self.originalURL;
             }
+            attr[M3U8_EXT_X_MEDIA_GROUP_ID] = FEED_AUDIO_GROUP_ID;
             attr[M3U8_EXT_X_MEDIA_AUTOSELECT] = @"NO";
             attr[M3U8_EXT_X_MEDIA_DEFAULT] = @"NO";
             M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
@@ -158,11 +160,6 @@
     attr[M3U8_EXT_X_MEDIA_GROUP_ID] = FEED_AUDIO_GROUP_ID;
     attr[M3U8_EXT_X_MEDIA_URI] = uri;
     M3U8ExtXMedia *media = [[M3U8ExtXMedia alloc] initWithDictionary:attr];
-    for (NSInteger i = 0; i< _xStreamList.count; i++ ) {
-        M3U8ExtXStreamInf *stream = [_xStreamList xStreamInfAtIndex:i];
-        [stream updateAudioTAG:FEED_AUDIO_GROUP_ID];
-    }
-    
     [self.xMediaList addExtXMedia:media];
 }
 
