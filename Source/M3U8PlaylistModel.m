@@ -64,6 +64,19 @@
             self.masterPlaylist = [[M3U8MasterPlaylist alloc] initWithContent:string baseURL:baseURL];
             self.masterPlaylist.name = INDEX_PLAYLIST_NAME;
             self.currentXStreamInf = self.masterPlaylist.xStreamList.firstStreamInf;
+            NSInteger maxBand = 0;
+            M3U8ExtXStreamInf *newMain;
+            for (NSInteger i = 0; i< self.masterPlaylist.xStreamList.count; i++ ) {
+                M3U8ExtXStreamInf *stream = [self.masterPlaylist.xStreamList xStreamInfAtIndex:i];
+                if(stream.averageBandwidth > maxBand)
+                {
+                    maxBand = stream.averageBandwidth;
+                    newMain = stream;
+                }
+            }
+            if(newMain) {
+                self.currentXStreamInf = newMain;
+            }
             if (self.currentXStreamInf) {
                 NSError *ero;
                 NSURL *m3u8URL = self.currentXStreamInf.m3u8URL;
