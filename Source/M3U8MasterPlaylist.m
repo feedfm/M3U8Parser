@@ -162,13 +162,11 @@
     
     for (NSInteger i = 0; i< _xStreamList.count; i++ ) {
         M3U8ExtXStreamInf *stream = [_xStreamList xStreamInfAtIndex:i];
-        if(stream.codecs.count > 1){
-            [stream updateAudioTAG:FEED_AUDIO_GROUP_ID];
-        }
+        [stream updateAudioTAG:FEED_AUDIO_GROUP_ID];
     }
     
     [self.xMediaList addExtXMedia:media];
-    
+
     
 }
 
