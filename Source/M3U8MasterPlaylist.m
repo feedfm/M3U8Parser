@@ -152,7 +152,7 @@
 -(void) addAlternateAudio:(NSString *)uri {
     
     
-    NSString *line = @"#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID=\"\",LANGUAGE=\"en\",NAME=\"Music and Audio\",AUTOSELECT=YES,DEFAULT=YES,CODECS=\"mp4a.40.2\",URI=\"";
+    NSString *line = @"#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID=\"\",LANGUAGE=\"en\",NAME=\"Music\",AUTOSELECT=YES,DEFAULT=YES,URI=\"";
     NSRange range = [line rangeOfString:M3U8_EXT_X_MEDIA];
     NSString *attribute_list = [line substringFromIndex:range.location + range.length];
     NSMutableDictionary *attr = attribute_list.m3u_attributesFromAssignment;
@@ -213,6 +213,8 @@
         [str appendString:media.m3u8PlainString];
         [str appendString:@"\n"];
     }
+    
+    [str appendString:@"\n"];
     
     for (NSInteger index = 0; index < self.xStreamList.count; index ++) {
         M3U8ExtXStreamInf *xsinf = [self.xStreamList xStreamInfAtIndex:index];
